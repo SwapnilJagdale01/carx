@@ -39,15 +39,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_extensions',
+    'carx_drf',
+    'carx_web',
+    'django.contrib.sites',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration'
 ]
-
+SITE_ID=1
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+         'rest_framework.authentication.TokenAuthentication',
 
     )
 }
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+    )
+REST_USE_JWT = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,3 +151,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
