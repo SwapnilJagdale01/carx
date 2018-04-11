@@ -60,6 +60,17 @@ class Maker(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'category'
+
+    def __str__(self):
+        return self.name
+
+
 class Vehicle(models.Model):
 
     make = models.ForeignKey(Maker, models.DO_NOTHING, db_column='make')
@@ -93,3 +104,29 @@ class Vehicle(models.Model):
     class Meta:
         managed = False
         db_table = 'vehicle'
+
+
+class Tyre(models.Model):
+    make = models.ForeignKey(Maker, models.DO_NOTHING, db_column='make')
+    model = models.ForeignKey(Makesmodel, models.DO_NOTHING, db_column='model')
+    type = models.CharField(max_length=100)
+    normalsectionwidth = models.CharField(db_column='normalSectionWidth', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    normalaspectratio = models.CharField(db_column='normalAspectRatio', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    constructiontype = models.CharField(db_column='constructionType', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    rimdiamter = models.CharField(db_column='rimDiamter', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    leadindex = models.CharField(db_column='leadIndex', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    speedsymbol = models.CharField(db_column='speedSymbol', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category')
+    pattern = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=100, blank=True, null=True)
+    warranty = models.CharField(max_length=100, blank=True, null=True)
+    image = models.ImageField(max_length=200, blank=True, null=True, upload_to='static/tyres/')
+    mrp = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tyre'
+
+    def __str__(self):
+        return self.type
+

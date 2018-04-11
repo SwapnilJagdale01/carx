@@ -18,7 +18,7 @@ router.register(r'customer', views.CustomerViewSet)
 urlpatterns = [
 
     url(r'^', include(router.urls)),
-    url(r'user/login/', views.HelloWorldView.as_view()),
+    url(r'user/login/', views.LoginView.as_view()),
     url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^docs/', include_docs_urls(title='api-docs', description='RESTful API for CarX'), name='api-docs'),
 

@@ -52,7 +52,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
 
-class HelloWorldView(APIView):
+class LoginView(APIView):
     def get(self, request):
         return Response({"message": "please request as a post"})
 
