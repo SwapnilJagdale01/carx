@@ -25,12 +25,12 @@ TRANSMITION = (
 class Customer(models.Model):
     user = models.OneToOneField(User, models.DO_NOTHING, db_column='user', primary_key=True)
     mobile = models.CharField(max_length=30)
-    profilepic = models.ImageField(upload_to='static/profile/', blank=True, null=True) #models.CharField(db_column='profilePic', max_length=100)  # Field name made lowercase.
+    profilepic = models.ImageField(upload_to='media/profile/', blank=True, null=True) #models.CharField(db_column='profilePic', max_length=100)  # Field name made lowercase.
     otp = models.IntegerField(blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True, db_column='createdAt', blank=True,null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'customer'
         app_label = 'carx_drf'
 
@@ -40,7 +40,7 @@ class Makesmodel(models.Model):
     make = models.ForeignKey('Maker', models.DO_NOTHING, db_column='make')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'MakesModel'
         app_label = 'carx_drf'
 
@@ -52,7 +52,7 @@ class Maker(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'maker'
         app_label = 'carx_drf'
 
@@ -64,7 +64,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'category'
         app_label = 'carx_drf'
 
@@ -103,7 +103,7 @@ class Vehicle(models.Model):
 
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'vehicle'
         app_label = 'carx_drf'
 
@@ -126,7 +126,7 @@ class Tyre(models.Model):
     mrp = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tyre'
         app_label='carx_drf'
 
