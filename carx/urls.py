@@ -23,8 +23,8 @@ import rest_auth.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(carx_drf.urls, namespace='carx_drf')),
     url(r'^carx/', include(carx_web.urls, namespace='carx')),
 ]

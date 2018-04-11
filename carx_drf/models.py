@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+from django.contrib.auth.models import User
 FUEL_TYPE = (
     ('Petrol', 'Petrol'),
     ('Diesel', 'Diesel'),
@@ -22,19 +23,16 @@ TRANSMITION = (
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=20)
-    email = models.EmailField(unique=True, max_length=100, blank=True, null=True)
-    password = models.CharField(max_length=100)
+    user = models.OneToOneField(User, models.DO_NOTHING, db_column='user', primary_key=True)
+    mobile = models.CharField(max_length=30)
     profilepic = models.ImageField(upload_to='static/profile/', blank=True, null=True) #models.CharField(db_column='profilePic', max_length=100)  # Field name made lowercase.
-    socialid = models.CharField(db_column='socialId', max_length=200, blank=True, null=True)  # Field name made lowercase.
     otp = models.IntegerField(blank=True, null=True)
-    status = models.BooleanField(blank=True, default=False)
-    createdAt = models.DateTimeField(db_column='createdAt', null=True)  # Field name made lowercase.
+    createdAt = models.DateTimeField(auto_now_add=True, db_column='createdAt', blank=True,null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'customer'
+        app_label = 'carx_drf'
 
 
 class Makesmodel(models.Model):
@@ -44,6 +42,7 @@ class Makesmodel(models.Model):
     class Meta:
         managed = False
         db_table = 'MakesModel'
+        app_label = 'carx_drf'
 
     def __str__(self):
         return self.name
@@ -55,6 +54,7 @@ class Maker(models.Model):
     class Meta:
         managed = False
         db_table = 'maker'
+        app_label = 'carx_drf'
 
     def __str__(self):
         return self.name
@@ -66,6 +66,7 @@ class Category(models.Model):
     class Meta:
         managed = False
         db_table = 'category'
+        app_label = 'carx_drf'
 
     def __str__(self):
         return self.name
@@ -104,6 +105,7 @@ class Vehicle(models.Model):
     class Meta:
         managed = False
         db_table = 'vehicle'
+        app_label = 'carx_drf'
 
 
 class Tyre(models.Model):
@@ -126,6 +128,7 @@ class Tyre(models.Model):
     class Meta:
         managed = False
         db_table = 'tyre'
+        app_label='carx_drf'
 
     def __str__(self):
         return self.type

@@ -1,0 +1,157 @@
+/* ---------------------------------------------------
+  TABLE - STYLING
+----------------------------------------------------- */
+.listing-outer{
+
+}
+#listing-container{
+	background:white;
+	padding-bottom:30px;
+	margin:0 13px;
+}
+.table-title h3{
+	color:#6b7395;
+	font-size:23px;
+	padding:0 0 10px 0;
+	display:inline-block;
+}
+#table-header{
+	background:#eceae3;
+	border-bottom:0;
+}
+#table-header>tr>th{
+	border-bottom:0;
+	color:#686a76;
+}
+#table-body> tr>td{
+	color:#686a76;
+	vertical-align:middle;
+	text-align:center;
+}
+#table-body> tr>td>a{
+	margin-right:20px;
+}
+.table-icons{
+	display:inline-block;
+}
+.fa-trash{
+	color:red;
+}
+.fa-pencil{
+	color:blue;
+	padding-right:10px;
+}
+.fa-eye{
+	color:green;
+	padding-right:10px;
+}
+.add-file{
+	height:50px;
+	width:50px;
+	background:#f4f4f4;
+	border:1px dashed #787f9d;
+	text-align:center;
+	display:inline-block;
+	margin-right:10px;
+}
+.add-file i{
+	line-height:50px;
+	display:inline-block;
+	font-size:25px;
+	color:#2965be;
+	font-weight:lighter;
+}
+.listing-buttons{
+	display:inline-block;
+}
+.listing-buttons{
+	margin:20px 0 10px 0;
+	float:right;
+}
+.listing-buttons a{
+	box-shadow:0 1px 2px 0 silver;
+}
+#listing-btn1{
+	border-radius:0;
+	background:linear-gradient(to right, #1a82d1 ,#074b7e);
+	color:white;
+	padding:5px 20px;
+	margin-top:20px;
+}
+#listing-btn{
+	border-radius:0;
+	background:linear-gradient(to right, #f09100 ,#bd7404);
+	color:white;
+	padding:5px 20px;
+	margin-right:10px;
+	margin-top:20px;
+}
+#table-tyre{
+	display:inline-block;
+	border-radius:10px;
+	border:1px solid #e7e7e7;
+}
+#table-form .form-custom{
+	display:inline-block;
+	margin:0;
+}
+.tyres{
+	display:inline-block;
+	vertical-align: top;
+}
+#form-label{
+	
+}
+/* ---------------------------------------------------
+   PAGINATION - STYLING
+----------------------------------------------------- */
+
+#listing-page>li>a, #listing-page>li>span{
+	border-radius:50%;
+	margin-right:5px;
+	background:#d4d4d4;
+	transition:all .5s;
+	padding:3px 7px;
+	font-size:10px;
+	color:#7690b1;
+}
+#listing-page>li>a:hover{
+	background:#f39100;
+	color:white;
+}
+#listing-page> #active >a{
+	background:#f39100;
+	color:white;
+}
+
+
+@media (max-width:768px){
+	.listing-buttons{
+		float:left;
+	}
+	#listing-btn{
+		margin-right:0;
+		padding:5px 10px;
+	}
+		#listing-btn1{
+			padding:5px 10px;
+		}
+	.table-title h3{
+		display:block;
+		margin:0;
+		margin-top:20px;
+	}
+	#table-form .form-custom{
+		display:inline-block;
+		margin:0;
+	}
+	.tyres{
+	display:block;
+}
+	#form-label{
+		margin-bottom:10px;
+	}
+	.add-file{
+		margin-right:0;
+	}
+}
