@@ -23,25 +23,28 @@ TRANSMITION = (
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, models.DO_NOTHING, db_column='user', primary_key=True)
     mobile = models.CharField(max_length=30)
-    profilepic = models.ImageField(upload_to='media/profile/', blank=True, null=True) #models.CharField(db_column='profilePic', max_length=100)  # Field name made lowercase.
+    profilepic = models.ImageField(upload_to='static/profile/', max_length=100, blank=True, null=True)
     otp = models.IntegerField(blank=True, null=True)
-    createdAt = models.DateTimeField(auto_now_add=True, db_column='createdAt', blank=True,null=True)  # Field name made lowercase.
+    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=200)
+    password = models.CharField(max_length=50)
+    socialId = models.CharField(max_length=500, blank=True, null=True, db_column='socialId')
+    status = models.BooleanField(default=False)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'customer'
-        app_label = 'carx_drf'
 
 
-class Makesmodel(models.Model):
+class Makermodel(models.Model):
     name = models.CharField(max_length=100)
     make = models.ForeignKey('Maker', models.DO_NOTHING, db_column='make')
 
     class Meta:
         managed = True
-        db_table = 'MakesModel'
+        db_table = 'makerModel'
         app_label = 'carx_drf'
 
     def __str__(self):
@@ -75,7 +78,7 @@ class Category(models.Model):
 class Vehicle(models.Model):
 
     make = models.ForeignKey(Maker, models.DO_NOTHING, db_column='make')
-    model = models.ForeignKey(Makesmodel, models.DO_NOTHING, db_column='model')
+    model = models.ForeignKey(Makermodel, models.DO_NOTHING, db_column='model')
     segment = models.CharField(max_length=200)
     verient = models.CharField(max_length=200)
     fuletype = models.CharField(db_column='fuleType', choices=FUEL_TYPE, max_length=100)  # Field name made lowercase.
@@ -110,7 +113,7 @@ class Vehicle(models.Model):
 
 class Tyre(models.Model):
     make = models.ForeignKey(Maker, models.DO_NOTHING, db_column='make')
-    model = models.ForeignKey(Makesmodel, models.DO_NOTHING, db_column='model')
+    model = models.ForeignKey(Makermodel, models.DO_NOTHING, db_column='model')
     type = models.CharField(max_length=100)
     normalsectionwidth = models.CharField(db_column='normalSectionWidth', max_length=100, blank=True, null=True)  # Field name made lowercase.
     normalaspectratio = models.CharField(db_column='normalAspectRatio', max_length=100, blank=True, null=True)  # Field name made lowercase.
