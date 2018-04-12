@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from carx_drf.models import Customer
-from carx_drf.serializers import CustomerSerializer
+from carx_drf.serializers import CustomerSerializer, TyreSerializer
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.status import HTTP_401_UNAUTHORIZED
 from rest_framework.authtoken.models import Token
-from models import Customer
+from models import Customer, Tyre
 from rest_framework import authentication
 from rest_framework import exceptions
 
@@ -52,6 +52,11 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
 
+class TyreViewSet(viewsets.ModelViewSet):
+    queryset = Tyre.objects.all()
+    serializer_class = TyreSerializer
+
+
 class LoginView(APIView):
     def get(self, request):
         return Response({"message": "please request as a post"})
@@ -59,7 +64,6 @@ class LoginView(APIView):
     def post(self, request):
 
         data = JSONParser().parse(request)
-        print data.get('email')
         try:
             queryset = Customer.objects.get(email=data.get('email'), password=data.get('password'))
 

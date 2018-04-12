@@ -12,6 +12,7 @@ from rest_framework.documentation import include_docs_urls
 
 router = routers.DefaultRouter()
 router.register(r'customer', views.CustomerViewSet)
+router.register(r'tyre', views.TyreViewSet)
 # router.register(r'customer/login/', views.HelloWorldView.as_view(), base_name='HelloWorldView')
 
 
