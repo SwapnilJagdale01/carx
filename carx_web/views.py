@@ -7,10 +7,12 @@ from django.contrib.auth import logout,login
 # Create your views here.
 from django.contrib import messages
 
-def Home(request):
-    return render(request,'home.html')
 
-def Login(request):
+def dashboard(request):
+    return render(request, 'carx_web/dashboard.html')
+
+
+def login(request):
     form_data = request.POST
     if request.POST:
         form = loginForm(request.POST or None)
@@ -23,14 +25,19 @@ def Login(request):
 
         if user:
             login(request, user)
-            return redirect('/carx/home/')
+            return redirect('/home/')
         else:
             messages.success(request, "Enter Valid User Name and Password.")
             return redirect('/carx/login/')
 
-    return render(request,'carx_login.html',{'form':form})
+    return render(request, 'carx_login.html', {'form':form})
 
 
-def Logout(request):
+def logout(request):
     logout(request)
     return redirect('/carx/login/')
+
+
+def create_vehicle(request):
+
+    return render(request,  'carx_web/createVehicle.html')

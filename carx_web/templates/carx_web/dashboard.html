@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styleBlock %}
+    	<link rel="stylesheet" href="{% static 'css/marvel_dashboard_new.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="categories-form-outer">
+					<div class="container-fluid" id="categories-form-container">
+						<h2>Create Tyre</h2>
+
+
+						<form>
+							<div class="row" id="cat-row-main">
+								<div class="col-xs-12 col-sm-6 col-md-3 cat-column-main">
+									<div class="col-xs-12">
+										<div class="row" id="cat-row">
+											<div class="col-xs-4 cat-icon-style">
+												<i class="flaticon-truck-wheel"></i>
+											</div>
+											<div class="col-xs-8" id="cat-text">
+												<a href=""><h4>TYRES</h4></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3 cat-column-main">
+									<div class="col-xs-12">
+										<div class="row" id="cat-row1">
+											<div class="col-xs-4 cat-icon-style2">
+												<i class="flaticon-rim"></i>
+											</div>
+											<div class="col-xs-8" id="cat-text2">
+												<a href=""><h4><h4>RIMS</h4></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3 cat-column-main">
+									<div class="col-xs-12">
+										<div class="row" id="cat-row2">
+											<div class="col-xs-4 cat-icon-style3">
+												<i class="flaticon-tire"></i>
+											</div>
+											<div class="col-xs-8" id="cat-text3">
+												<a href=""><h4><h4>TUBES</h4></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<a class="btn btn-default" href="#" id="categories-btn1" role="button">Vendor List</a>
+							<a class="btn btn-default" href="#" id="categories-btn2" role="button">Create Vendor</a>
+						</form>
+					</div>
+				</div>
+
+
+  {% endblock %}
+
+
+{% block ScriptBlock %}
+{% endblock %}
