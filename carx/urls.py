@@ -26,5 +26,6 @@ urlpatterns = [
     #url(r'^rest-auth/', include('rest_auth.urls')),
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(carx_drf.urls, namespace='carx_drf')),
-    url(r'^carx/', include(carx_web.urls, namespace='carx')),
+    url(r'^', include(carx_web.urls, namespace='carx')),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

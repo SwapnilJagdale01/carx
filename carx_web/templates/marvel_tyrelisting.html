@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Tyre Listing</title>
+		
+		<link rel="stylesheet" href="css/marvel_sidebar.css">
+		<link rel="stylesheet" href="css/marvel_menu.css">
+		<link rel="stylesheet" href="css/marvel_listing.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+    </head>
+    <body>
+
+
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                   <img src="images/logo.png" class="img-responsive" alt="page_logo">
+                </div>
+				
+				<ul id="list-components">
+					<li><a href=""><i class="fa fa-tachometer"></i>
+						<h4>Dashboard</h4></a></li>
+				</ul>
+				
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+			
+			
+				 <!-- NAVBAR -->
+                <nav class="navbar navbar-default" id="navbar-custom">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header" id="menu-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" id="navbar-btn">
+                               <i class="fa fa-bars" id="sidebar-btn"></i>
+                            </button>
+							<a href="#" class="pull-right" id="logout-btn"><i class="fa fa-power-off"></i>Logout</a>
+                        </div>
+						<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+							<span class="sr-only">Toggle navigation</span>
+						</a>
+					
+                    </div>
+                </nav>
+				
+				
+				 <!-- CONTENT -->
+				<div class="listing-outer">
+					<div class="container-fluid" id="listing-container">
+						 <!-- Table -->
+						<div class="table-title">
+							<h3>Tyre List</h3>
+							<div class="listing-buttons">
+								
+								<a class="btn btn-default" href="#" id="listing-btn" role="button">Add New Tyres</a>
+								<a class="btn btn-default" href="#" id="listing-btn1" role="button">Add Multiple Tyres</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+							  <div class="table table-responsive" style="overflow-x:auto;">
+								  <table class="table table-bordered">
+									<thead id="table-header">
+									  <tr>
+										<th>#</th>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Type</th>
+										<th>Pictures</th>
+										<th>Actions</th>
+									  </tr>
+									</thead>
+									<tbody id="table-body">
+									  <tr>
+										<td>1</td>
+										<td>Ceat Grip</td>
+										<td>Ceat</td>
+										<td>Tubeless</td>
+										<td>
+											<form id="table-form">
+												<div class="form-group form-custom">
+													<label for="exampleInputFile" id="form-label"><div class="add-file"><i class="fa fa-plus-circle"></i></div></label>
+													<input type="file" id="exampleInputFile" style="display:none;">
+												</div>
+												<div class="form-group form-custom">
+													<label for="exampleInputFile" id="form-label"><div class="add-file"><i class="fa fa-plus-circle"></i></div></label>
+													<input type="file" id="exampleInputFile" style="display:none;">
+												</div>
+												<div class="tyres">
+													<img src="images/tyre.jpg" class="img-responsive" id="table-tyre" alt="table_tyre"> 
+													<img src="images/tyre.jpg" class="img-responsive" id="table-tyre" alt="table_tyre"> 
+												</div>
+											</form>
+											
+										</td>
+										<td><div class="table-icons">
+												<a href="#" class="pull-right"><i class="fa fa-trash"></i></a>
+												<a href="#" class="pull-right"><i class="fa fa-pencil"></i>
+												<a href="#" class="pull-right"><i class="fa fa-eye"></i>
+											</div>
+										</td>
+									  </tr>
+									   <tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									  </tr>
+									</tbody>
+								  </table>
+								</div>
+							</div>
+						</div>
+						
+						 <!-- Pagination -->
+						<nav aria-label="Page navigation">
+						  <ul class="pagination" id="listing-page">
+							<li>
+							  <a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							  </a>
+							</li>
+							<li id="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li>
+							  <a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							  </a>
+							</li>
+						  </ul>
+						</nav>
+					</div>
+				</div>
+						
+				
+				
+			</div>
+
+		</div>
+
+
+
+
+        <script src="js/jquery-1.12.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+
+        <script type="text/javascript">
+              $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+        </script>
+    </body>
+</html>

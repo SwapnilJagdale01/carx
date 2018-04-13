@@ -25,7 +25,7 @@ SECRET_KEY = 'mn$j=qc*gj#8!w)pn&th@8g5%co$*f72=s*7^yfs6o+mxojhjm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.70', '127.0.0.1']
 
 
 # Application definition
@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'carx_web',
     'django.contrib.sites',
     'rest_auth',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration'
+    'rest_auth.registration',
+    'rest_framework.authtoken',
+
 ]
-SITE_ID=1
+SITE_ID = 1
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
          'rest_framework.authentication.TokenAuthentication',
@@ -56,9 +57,20 @@ REST_FRAMEWORK = {
 }
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+
     )
 REST_USE_JWT = True
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.TokenAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     )
+# }
+
+APPEND_SLASH=False
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,8 +116,7 @@ WSGI_APPLICATION = 'carx.wsgi.application'
 DATABASES = {
      'default': {
           'ENGINE': 'django.db.backends.mysql',
-          'NAME': 'carxdb',
-          #'NAME': 'schoolzen_django',
+          'NAME': 'carx',
           'USER':'root',
           'PASSWORD':'',
           'HOST': '127.0.0.1',
@@ -154,3 +165,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

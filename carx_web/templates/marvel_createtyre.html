@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>CATEGORY CREATE</title>
+		
+		<link rel="stylesheet" href="css/marvel_sidebar.css">
+		<link rel="stylesheet" href="css/marvel_menu.css">
+		<link rel="stylesheet" href="css/marvel_createtyre.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+    </head>
+    <body>
+
+
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                   <img src="images/logo.png" class="img-responsive" alt="page_logo">
+                </div>
+				
+				<ul id="list-components">
+					<li><a href=""><i class="fa fa-tachometer"></i>
+						<h4>Dashboard</h4></a></li>
+					<li><a href=""><i class="fa fa-tachometer"></i>
+						<h4>Create Tyre</h4></a></li>
+					<li><a href=""><i class="fa fa-tachometer"></i>
+						<h4>Tyre List</h4></a></li>
+				</ul>
+				
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+			
+			
+				 <!-- NAVBAR -->
+                <nav class="navbar navbar-default" id="navbar-custom">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header" id="menu-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info" id="navbar-btn">
+                               <i class="fa fa-bars" id="sidebar-btn"></i>
+                            </button>
+							<a href="#" class="pull-right" id="logout-btn"><i class="fa fa-power-off"></i>Logout</a>
+                        </div>
+						<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+							<span class="sr-only">Toggle navigation</span>
+						</a>
+					
+                    </div>
+                </nav>
+				
+				
+				 <!-- CONTENT -->
+				<div class="product-form-outer">
+					<div class="container-fluid" id="product-form-container">
+						<h2>Create Tyre</h2>
+					
+						
+						<form>
+							<div class="row" id="pro-row">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext">Name</label>
+										<input type="text" class="form-control" id="Inputtext" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext2">Brand</label>
+										<input type="text" class="form-control" id="Inputtext2" placeholder="">
+									</div>
+								 </div>
+							</div>
+
+						
+							<h3>Upload Photo</h3>
+							<div class="row" id="pro-file-row">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleInputFile">Left<div class="add-file"><i class="fa fa-plus-circle"></i></div><div class="image-box"></div></label>
+										<input type="file" id="exampleInputFile" style="visibility:hidden;">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleInputFile">Right<div class="add-file"><i class="fa fa-plus-circle"></i></div><div class="image-box"></div></label>
+										<input type="file" id="exampleInputFile" style="visibility:hidden;">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleInputFile">Front<div class="add-file"><i class="fa fa-plus-circle"></i></div><div class="image-box"></div></label>
+										<input type="file" id="exampleInputFile" style="visibility:hidden;">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleInputFile">Back<div class="add-file"><i class="fa fa-plus-circle"></i></div><div class="image-box"></div></label>
+										<input type="file" id="exampleInputFile" style="visibility:hidden;">
+									</div>
+								</div>
+							</div>
+							
+							
+							
+							<h3>Vehicle Type</h3>
+							<div class="row" id="pro-file-row1">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleSelectFile">Two Weeler</label>
+										<select class="form-control" id="exampleSelectFile">
+										  <option>Select Two Weeler</option>
+										  <option>2</option>
+										  <option>3</option>
+										  <option>4</option>
+										  <option>5</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleSelectFile">Two Weeler</label>
+										<select class="form-control" id="exampleSelectFile">
+										  <option>Select Two Weeler</option>
+										  <option>2</option>
+										  <option>3</option>
+										  <option>4</option>
+										  <option>5</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom                                                                                                                                                                                                                             ">
+										<label for="exampleSelectFile">Two Weeler</label>
+										<select class="form-control" id="exampleSelectFile">
+										  <option>Select Two Weeler</option>
+										  <option>2</option>
+										  <option>3</option>
+										  <option>4</option>
+										  <option>5</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							
+							<h3>Product Specification</h3>
+							<div class="row" id="pro-spec-row">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext3">Brand</label>
+										<input type="text" class="form-control" id="Inputtext3" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext4">Product Type</label>
+										<input type="text" class="form-control" id="Inputtext4" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext5">Normal Section Width(mm)</label>
+										<input type="text" class="form-control" id="Inputtext5" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext6">Normal Aspect Ratio</label>
+										<input type="text" class="form-control" id="Inputtext6" placeholder="Section Height/ Section Width">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext7">Consumer Type</label>
+										<input type="text" class="form-control" id="Inputtext7" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext8">Construction Type (R for Radial)</label>
+										<input type="text" class="form-control" id="Inputtext8" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext9">Rim Diameter (Inches)</label>
+										<input type="text" class="form-control" id="Inputtext9" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext10">Load Index</label>
+										<input type="text" class="form-control" id="Inputtext10" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext11">Speed Symbol</label>
+										<input type="text" class="form-control" id="Inputtext11" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext12">Category</label>
+										<input type="text" class="form-control" id="Inputtext12" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext13">Pattern</label>
+										<input type="text" class="form-control" id="Inputtext13" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext14">Product Description</label>
+										<input type="text" class="form-control" id="Inputtext14" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext15">Warranty</label>
+										<input type="text" class="form-control" id="Inputtext15" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext16">Warranty Summary</label>
+										<input type="text" class="form-control" id="Inputtext16" placeholder="">
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext17">MRP</label>
+										<input type="text" class="form-control" id="Inputtext17" placeholder="">
+									</div>
+								</div>
+							</div>
+							
+							<a class="btn btn-default pull-right" href="#" id="product-btn" role="button">Create</a>
+						</form>
+					</div>
+				</div>
+						
+				
+				
+			</div>
+
+		</div>
+
+
+
+
+        <script src="js/jquery-1.12.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+
+        <script type="text/javascript">
+              $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+        </script>
+    </body>
+</html>
