@@ -21,6 +21,12 @@ TRANSMITION = (
 
 )
 
+VEHICLE_TYPE = (
+    ('2 Wheeler', '2 Wheeler'),
+    ('4 Wheeler', '4 Wheeler'),
+    ('Commercial', 'Commercial'),
+)
+
 
 class Customer(models.Model):
     mobile = models.CharField(max_length=30)
@@ -77,8 +83,10 @@ class Category(models.Model):
 
 class Vehicle(models.Model):
 
+    vehicle_type = models.CharField(db_column='vehicleType', choices=VEHICLE_TYPE, blank=False, max_length=100)
     make = models.ForeignKey(Maker, models.DO_NOTHING, db_column='make')
     model = models.ForeignKey(Makermodel, models.DO_NOTHING, db_column='model')
+    name = models.CharField(max_length=100)
     segment = models.CharField(max_length=200)
     verient = models.CharField(max_length=200)
     fuletype = models.CharField(db_column='fuleType', choices=FUEL_TYPE, max_length=100)  # Field name made lowercase.
@@ -87,23 +95,24 @@ class Vehicle(models.Model):
     capacity = models.CharField(max_length=100)
     output = models.CharField(max_length=100)
     torque = models.CharField(max_length=100)
-    transmission = models.CharField(max_length=100, choices=TRANSMITION)
+    transmission_type = models.CharField(max_length=100, choices=TRANSMITION)
+    transmission = models.CharField(max_length=100, blank=True, null=True)
     weight = models.CharField(max_length=100, blank=True, null=True)
     suspensiontype = models.CharField(db_column='suspensionType', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    suspensionfront = models.CharField(db_column='suspensionFront', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    suspensionrear = models.CharField(db_column='suspensionRear', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    startdate = models.DateField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
-    enddate = models.DateField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
-    status = models.CharField(max_length=100, blank=True, null=True)
-    color = models.CharField(max_length=100, blank=True, null=True)
-    warranty = models.CharField(max_length=200, blank=True, null=True)
-    onroadprice = models.CharField(db_column='onRoadPrice', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    taxclass = models.CharField(db_column='taxClass', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    length = models.CharField(max_length=200, blank=True, null=True)  # Field name made lowercase.
+    width = models.CharField(max_length=200, blank=True, null=True)  # Field name made lowercase.
+    height = models.CharField(max_length=200, blank=True, null=True)  # Field name made lowercase
+    startdate = models.PositiveSmallIntegerField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
+    enddate = models.PositiveSmallIntegerField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
+    steering = models.CharField(max_length=100, blank=True, null=True)
+    type_and_wheel = models.CharField(db_column='typeAndwheel', max_length=200, blank=True, null=True)
+    breaks = models.CharField(db_column='breaks', max_length=100, blank=True, null=True)  # Field name made lowercase.
     image = models.ImageField(upload_to='static/vehicle/', blank=True, null=True)
-    serviceschedule = models.CharField(db_column='serviceSchedule', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    seating = models.CharField(max_length=100, blank=True, null=True)
+    ground_clearance = models.CharField(db_column='groundClearance', max_length=200, blank=True, null=True)  # Field name made lowercase.
     fueltank = models.CharField(db_column='fuelTank', max_length=100, blank=True, null=True)  # Field name made lowercase.
-
+    mileage = models.CharField(db_column='mileage', max_length=100, blank=False)
+    scaling = models.CharField(db_column='scaling', max_length=100, blank=True)
+    turning_radius = models.CharField(db_column='turningRadius', max_length=100, blank=True)
 
     class Meta:
         managed = True
