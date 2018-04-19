@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block style %}
+
+    <style>
+    #listing-btn2{
+	border-radius:0;
+	background:linear-gradient(to right, #2b542c ,#087b7e);
+	color:white;
+	padding:5px 20px;
+	margin-top:20px;
+}
+    #listing-btn3{
+	border-radius:0;
+	background:linear-gradient(to right, #f09100 ,#449d44);
+	color:white;
+	padding:5px 20px;
+	margin-top:20px;
+}
+    </style>
+{% endblock %}
+{% block head %}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'css/marvel_listing.css' %}">
+{% endblock %}
+{% block ScriptBlock %}
+
+  $(document).ready(function () {
+    $("#import").click(function () {
+      if ($("#file").val() == "") {
+          alert("Please select a File to Import...");
+      }
+
+      else{
+
+          $("#form_sample_1").submit()
+      }
+
+  });
+       document.getElementById("file").onchange = function() {
+    var fileName = this.value;
+    var fileExtension = fileName.substr(fileName.length - 4);
+
+    console.log(fileExtension);
+    if (fileExtension != ".xls") {
+        alert("Only .xls files are allowed!");
+    $("#file").val('');
+    }
+}
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+                  setTimeout(function() {
+                        $('.alert').fadeOut('slow');
+                    }, 2500);
+             });
+
+{% endblock %}
+{% block content %}
+				 <!-- CONTENT -->
+				<div class="listing-outer">
+					<div class="container-fluid" id="listing-container">
+						 <!-- Table -->
+						<div class="table-title">
+							<h3>Tyre List</h3>
+							<div class="listing-buttons">
+								<a class="btn btn-default" href="{% url "carx:add_tyre" %}" id="listing-btn" role="button">Add New Tyres</a>
+								<a class="btn btn-default" href="#" id="listing-btn1" data-toggle="modal" data-target="#myModal" role="button">Add Multiple Tyres</a>
+                                <a class="btn btn-default" href="{% url "carx:tyre_import_data" %}" id="listing-btn2" role="button">Download Data</a>
+                                <a class="btn btn-default" href="{% url "carx:tyre_import_format" %}" id="listing-btn3" role="button">Download Data Format</a>
+                            </div>
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert" style="color: black;" >{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                             </div>
+                            {% endfor %}
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+							  <div class="table table-responsive" style="overflow-x:auto;">
+								  <table class="table table-bordered">
+									<thead id="table-header">
+									  <tr>
+{#										<th>#</th>#}
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Product Type</th>
+										<th>Pictures</th>
+										<th>Actions</th>
+									  </tr>
+									</thead>
+									<tbody id="table-body">
+                                    {% for tyre in tyre_list %}
+									  <tr>
+{#										<td>{{ forloop.counter }}</td>#}
+										<td>{{ tyre.name }}</td>
+										<td>{{ tyre.brand }}</td>
+										<td>{{ tyre.product_type }}</td>
+										<td>
+											<form id="table-form">
+                                                {% if tyre.left_image %}
+                                                    <div class="add-file" style="background-image:url({{ path }}{{ tyre.left_image }});background-position: center;background-repeat: no-repeat;border: 0;background-size: 100%">
+                                                    </div>
+                                                {% else %}
+                                                    <div class="form-group form-custom">
+													<label for="exampleInputFile" id="form-label"><div class="add-file"><i class="fa fa-plus-circle"></i></div></label>
+													<input type="file" id="exampleInputFile" style="display:none;">
+												</div>
+                                                {% endif %}
+                                            {% if tyre.right_image %}
+                                                <div class="add-file" style="background-image:url({{ path }}{{ tyre.right_image }});background-position: center;background-repeat: no-repeat;border: 0;background-size: 100%">
+                                                </div>
+
+                                                {% else %}
+                                                   <div class="form-group form-custom">
+													<label for="exampleInputFile" id="form-label"><div class="add-file"><i class="fa fa-plus-circle"></i></div></label>
+													<input type="file" id="exampleInputFile" style="display:none;">
+												</div>
+                                                {% endif %}
+                                            {% if tyre.front_image %}
+                                                <div class="add-file" style="background-image:url({{ path }}{{ tyre.front_image }});background-position: center;background-repeat: no-repeat;border: 0;background-size: 100%">
+                                                </div>
+
+                                                {% else %}
+                                                    <div class="form-group form-custom">
+													<label for="exampleInputFile" id="form-label"><div class="add-file"><i class="fa fa-plus-circle"></i></div></label>
+													<input type="file" id="exampleInputFile" style="display:none;">
+												</div>
+                                                {% endif %}
+                                            {% if tyre.back_image %}
+                                                 <div class="add-file"  style="background-image:url({{ path }}{{ tyre.back_image }});background-position: center;background-repeat: no-repeat;border: 0;background-size: 100%">
+                                                 </div>
+                                                {% else %}
+                                                   <div class="form-group form-custom">
+													<label for="exampleInputFile" id="form-label"><div class="add-file"><i class="fa fa-plus-circle"></i></div></label>
+													<input type="file" id="exampleInputFile" style="display:none;">
+												</div>
+                                                {% endif %}
+
+											</form>
+
+										</td>
+										<td><div class="table-icons">
+                                            <a href="{% url "carx:tyre_delete" tyre.id %}" class="pull-right"><i class="fa fa-trash"></i></a>
+                                            <a href="{% url "carx:tyre_update" tyre.id %}" class="pull-right"><i class="fa fa-pencil"></i></a>
+                                            <a href="{% url "carx:tyre_view" tyre.id %}" class="pull-right"><i class="fa fa-eye"></i></a>
+											</div>
+										</td>
+									  </tr>
+                                    {% endfor %}
+
+									</tbody>
+								  </table>
+								</div>
+							</div>
+						</div>
+
+						 <!-- Pagination -->
+						<nav aria-label="Page navigation">
+						   {% if tyre_list.has_other_pages %}
+                            <ul class="pagination">
+                                {% if tyre_list.has_previous %}
+                                <li><a href="?page={{ tyre_list.previous_page_number }}">&laquo;</a></li>
+                                {% else %}
+                                 <li class="disabled"><span>&laquo;</span></li>
+                                {% endif %}
+                                {% for i in tyre_list.paginator.page_range %}
+                                    {% if tyre_list.number == i %}
+                                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                    {% else %}
+                                         <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                 {% if tyre_list.has_next %}
+                                    <li><a href="?page={{ tyre_list.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+						</nav>
+					</div>
+				</div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <form action="{% url "carx:tyre_import" %}" id="form_sample_1" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Choose File</h4>
+                    </div>
+                    <div class="modal-body">
+                       <input type="file" name="excel" id="file">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="import" class="btn btn-default">Upload</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+

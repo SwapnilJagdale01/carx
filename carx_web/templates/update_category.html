@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block style %}
+    <style>
+    #update_category{
+	border-radius:0;
+	background:linear-gradient(to right, #1a82d1 ,#074b7e);
+	color:white;
+	padding:5px 40px;
+}
+     #cancel_category{
+	border-radius:0;
+	background:linear-gradient(to right, #2b542c ,#087b7e);
+	color:white;
+	padding:5px 40px;
+
+}
+    </style>
+{% endblock %}
+{% block ScriptBlock %}
+
+  $(document).ready(function () {
+      console.log("hiiii");
+      if ($('#action_type').val()=='view'){
+         $('#header').html('<h2>View Category</h2>');
+         $('.form-control').prop("disabled", true);
+         $('#cancel_category').prop("disabled", false);
+         document.getElementById('update_category').style.visibility = 'hidden';
+      }
+      else{
+    $('#header').html('<h2>Update Category</h2>');
+          console.log('update');
+          $('.form-control').prop("disabled", false);
+          document.getElementById('update_category').style.visibility = 'visible';
+      }
+
+      $('#update_category').click(function (event) {
+          if($('#id_name').val()!='') {
+              $('#category_form').submit();
+          }
+          else{
+              alert('Please Insert category name');
+          }
+      });
+  });
+
+{% endblock %}
+	{% block content %}
+				 <!-- CONTENT -->
+				<div class="row">
+					<div class="col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+						<div class="vendor-form-outer">
+							<div class="container-fluid" id="vendor-form-container">
+                                <div id="header"><h2>Update Category</h2></div>
+
+
+								<form action="" id="category_form" class="form-horizontal" method="POST">
+									{% csrf_token %}
+                                     <input type="hidden" id="action_type" name="action_type" value="{{ action }}">
+
+                                    <input type="hidden" id="category_id" name="category_id" value="{{ id }}">
+
+                                     <div class="row" id="vendor-row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Name  <font color="red">*</font></label>
+                                                <div class="col-md-9">
+                                                    {{form.name}}
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+									    </div>
+                                    </div>
+
+
+									<div class="pull-right">
+									<button class="btn btn-default" id="update_category" >Update</button>&nbsp;
+                                    <button type="button" onclick="window.location.href='{% url "carx:category_list" %}'" class="btn btn-default" id="cancel_category" >Cancel</button>
+								    </div>
+                                </form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			{% endblock %}

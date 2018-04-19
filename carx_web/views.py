@@ -37,7 +37,7 @@ def Login(request):
 
         if user:
             login(request, user)
-            return redirect('home/')
+            return redirect('carx:home')
         else:
             messages.success(request, "Enter Valid User Name and Password.")
             form = loginForm()
@@ -50,10 +50,12 @@ def Logout(request):
     logout(request)
     return redirect('/')
 
+
 @login_required(login_url='/')
 def create_vehicle(request):
     form = VehicleForm()
     return render(request,  'createVehicle.html', {'form': form})
+
 
 @login_required(login_url='/')
 def save_vehicle(request):

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block ScriptBlock %}
+
+  $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+                  setTimeout(function() {
+                        $('.alert').fadeOut('slow');
+                    }, 2500);
+  });
+
+{% endblock %}
+{% block head %}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'css/marvel_listing.css' %}">
+{% endblock %}
+{% block content %}
+				 <!-- CONTENT -->
+				<div class="listing-outer">
+					<div class="container-fluid" id="listing-container">
+						 <!-- Table -->
+						<div class="table-title">
+							<h3>Category List</h3>
+							<div class="listing-buttons">
+
+								<a class="btn btn-default" href="{% url "carx:save_category" %}" id="listing-btn" role="button">Add New Category</a>
+{#								<a class="btn btn-default" href="#" id="listing-btn1" role="button">Add Multiple Tyres</a>#}
+							</div>
+
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert" style="color: black;" >{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                             </div>
+                            {% endfor %}
+						</div>
+                    <br>
+						<div class="row">
+							<div class="col-xs-12">
+							  <div class="table table-responsive" style="overflow-x:auto;">
+								  <table class="table table-bordered">
+									<thead id="table-header">
+									  <tr>
+{#										<th>#</th>#}
+										<th>Name</th>
+										<th>Actions</th>
+									  </tr>
+									</thead>
+									<tbody id="table-body">
+                                    {% for cat in category_list %}
+									  <tr>
+
+{#										<td>{{ forloop.counter }}</td>#}
+										<td>{{ cat.name }}</td>
+
+										<td>
+                                            <div class="table-icons">
+												<a href="{% url "carx:category_delete" cat.id %}" class="pull-right"><i class="fa fa-trash"></i></a>
+                                                <a href="{% url "carx:category_update" cat.id %}" class="pull-right"><i class="fa fa-pencil"></i></a>
+                                                <a href="{% url "carx:category_view" cat.id %}" class="pull-right"><i class="fa fa-eye"></i></a>
+											</div>
+										</td>
+									  </tr>
+									   {% endfor %}
+									</tbody>
+								  </table>
+								</div>
+							</div>
+						</div>
+
+						 <!-- Pagination -->
+						<nav aria-label="Page navigation">
+						  {% if category_list.has_other_pages %}
+                            <ul class="pagination">
+                                {% if category_list.has_previous %}
+                                <li><a href="?page={{ category_list.previous_page_number }}">&laquo;</a></li>
+                                {% else %}
+                                 <li class="disabled"><span>&laquo;</span></li>
+                                {% endif %}
+                                {% for i in category_list.paginator.page_range %}
+                                    {% if category_list.number == i %}
+                                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                    {% else %}
+                                         <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if category_list.has_next %}
+                                    <li><a href="?page={{ category_list.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                                {% endif %}
+                            </ul>
+                            {% endif %}
+						</nav>
+					</div>
+				</div>
+
+{% endblock %}
+

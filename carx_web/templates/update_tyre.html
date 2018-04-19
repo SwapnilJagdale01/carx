@@ -1,0 +1,330 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block style %}
+       <style>
+ #update_tyre{
+	border-radius:0;
+	background:linear-gradient(to right, #1a82d1 ,#074b7e);
+	color:white;
+	padding:5px 40px;
+}
+     #cancel_tyre{
+	border-radius:0;
+	background:linear-gradient(to right, #2b542c ,#087b7e);
+	color:white;
+	padding:5px 40px;
+
+}
+    </style>
+{% endblock %}
+
+{% block head %}
+     <link rel="stylesheet" href="{% static 'css/marvel_createtyre.css'%}">
+{% endblock %}
+{% block ScriptBlock %}
+
+  $(document).ready(function () {
+      console.log("hiiii");
+      if ($('#action_type').val()=='view'){
+        $('#header').html('<h2>View Tyre</h2>');
+         $('.form-control').prop("disabled", true);
+         $('#pro-file-row').prop("disabled", true);
+         document.getElementById('update_tyre').style.visibility = 'hidden';
+      }
+      else{
+    $('#header').html('<h2>Update Tyre</h2>');
+          $('.form-control').prop("disabled", false);
+          $('#pro-file-row').prop("disabled", false);
+          document.getElementById('update_tyre').style.visibility = 'visible';
+      }
+
+        document.getElementById('id_left_image').style.visibility='hidden';
+        document.getElementById('id_right_image').style.visibility='hidden';
+        document.getElementById('id_front_image').style.visibility='hidden';
+        document.getElementById('id_back_image').style.visibility='hidden';
+        $("#LeftPicture").css({"background-image": "url(" + $('#left_image').val() + ")",  "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+        $("#RightPicture").css({"background-image": "url(" + $('#right_image').val()+ ")",  "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+        $("#FrontPicture").css({"background-image": "url(" + $('#front_image').val() + ")",  "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+        $("#BackPicture").css({"background-image": "url(" + $('#back_image').val() + ")",  "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+
+      $('#update_tyre').click(function (event) {
+          if($('#id_name').val()!='' || $('#id_brand').val()!=''||$('#id_vehicle').val()!='PLEASE SELECT'||$('#id_category').val()!='PLEASE SELECT') {
+              $('#tyre_form').submit();
+          }
+          else{
+               alert('The fields with * mark are mandetory fields');
+          }
+      });
+      $("#id_left_image").on("change", function () {
+
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) return; // Check if File is selected, or no FileReader support
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) !== -1) { //  Allow only image upload
+                        var ReaderObj = new FileReader(); // Create instance of the FileReader
+                        ReaderObj.readAsDataURL(files[0]); // read the file uploaded
+                        ReaderObj.onloadend = function () { // set uploaded image data as background of div
+                            $("#LeftPicture").css({"background-image": "url(" + this.result + ")",  "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+                        }
+                    }
+                    else {
+                        this.value = null;
+                        alert("Only formats are allowed : " + fileExtension.join(', '));
+                    }
+                });
+      $("#id_right_image").on("change", function () {
+
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) return; // Check if File is selected, or no FileReader support
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) !== -1) { //  Allow only image upload
+                        var ReaderObj = new FileReader(); // Create instance of the FileReader
+                        ReaderObj.readAsDataURL(files[0]); // read the file uploaded
+                        ReaderObj.onloadend = function () { // set uploaded image data as background of div
+                            $("#RightPicture").css({"background-image": "url(" + this.result + ")", "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+                        }
+                    }
+                    else {
+                        this.value = null;
+                        alert("Only formats are allowed : " + fileExtension.join(', '));
+                    }
+                });
+      $("#id_front_image").on("change", function () {
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) return; // Check if File is selected, or no FileReader support
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) !== -1) { //  Allow only image upload
+                        var ReaderObj = new FileReader(); // Create instance of the FileReader
+                        ReaderObj.readAsDataURL(files[0]); // read the file uploaded
+                        ReaderObj.onloadend = function () { // set uploaded image data as background of div
+                            $("#FrontPicture").css({"background-image": "url(" + this.result + ")", "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+                        }
+                    }
+                    else {
+                        this.value = null;
+                        alert("Only formats are allowed : " + fileExtension.join(', '));
+                    }
+                });
+      $("#id_back_image").on("change", function () {
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) return; // Check if File is selected, or no FileReader support
+                    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) !== -1) { //  Allow only image upload
+                        var ReaderObj = new FileReader(); // Create instance of the FileReader
+                        ReaderObj.readAsDataURL(files[0]); // read the file uploaded
+                        ReaderObj.onloadend = function () { // set uploaded image data as background of div
+                            $("#BackPicture").css({"background-image": "url(" + this.result + ")", "background-position": "center","background-repeat": "no-repeat","border": "0","background-size": "100%"});
+                        }
+                    }
+                    else {
+                        this.value = null;
+                        alert("Only formats are allowed : " + fileExtension.join(', '));
+                    }
+                });
+
+  });
+
+{% endblock %}
+
+{% block content %}
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <!-- Page Content Holder -->
+            <div id="content">
+                <!-- CONTENT -->
+				<div class="product-form-outer">
+					<div class="container-fluid" id="product-form-container">
+                        <div id="header"><h2>Create Tyre</h2></div>
+
+
+						<form action="" id="tyre_form" enctype="multipart/form-data" method="POST">
+							{% csrf_token %}
+                            <input type="hidden" id="action_type" name="action_type" value="{{ action }}">
+
+                             <input type="hidden" id="tyre_id" name="tyre_id" value="{{ id }}">
+                             <input type="hidden" id="left_image" name="left" value="{{ path }}{{ tyre_rec.left_image }}">
+                             <input type="hidden" id="right_image" name="right" value="{{ path }}{{ tyre_rec.right_image }}">
+                             <input type="hidden" id="front_image" name="front" value="{{ path }}{{ tyre_rec.front_image }}">
+                             <input type="hidden" id="back_image" name="back" value="{{ path }}{{ tyre_rec.back_image }}">
+
+                            <div class="row" id="pro-row">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext">Name <font color="red">*</font></label></label>
+										{{ form.name }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext2">Brand <font color="red">*</font></label></label>
+										{{ form.brand }}
+									</div>
+								 </div>
+							</div>
+
+
+							<h3>Upload Photo</h3>
+							<div class="row" id="pro-file-row">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="id_left_image">Left
+                                            <div class="add-file"><i class="fa fa-plus-circle"></i></div>
+                                            <div id="LeftPicture" class="image-box"></div></label>
+
+                                        {{ form.left_image}}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="id_right_image">Right
+                                            <div class="add-file"><i class="fa fa-plus-circle"></i></div>
+                                            <div id="RightPicture" class="image-box"></div></label>
+
+                                        {{ form.right_image}}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="id_front_image">Front
+                                            <div class="add-file"><i class="fa fa-plus-circle"></i></div>
+                                            <div id="FrontPicture" class="image-box"></div></label>
+
+                                        {{ form.front_image}}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="id_back_image">Back
+                                            <div class="add-file"><i class="fa fa-plus-circle"></i></div>
+                                            <div id="BackPicture" class="image-box"></div></label>
+
+                                        {{ form.back_image}}
+									</div>
+								</div>
+							</div>
+
+
+
+							<h3>Vehicle Type</h3>
+							<div class="row" id="pro-file-row1">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleSelectFile">Product Type</label>
+										{{ form.product_type }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="exampleSelectFile">Vehicle <font color="red">*</font></label></label>
+										{{ form.vehicle }}
+									</div>
+								</div>
+
+							</div>
+
+							<h3>Product Specification</h3>
+							<div class="row" id="pro-spec-row">
+
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext5">Normal Section Width(mm)</label>
+										{{ form.normalsectionwidth }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext6">Normal Aspect Ratio</label>
+										{{ form.normalaspectratio }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext7">Construction Type</label>
+										{{ form.constructiontype }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext8">Construction Type (R for Radial)</label>
+										{{ form.construction_type_R }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext9">Rim Diameter (Inches)</label>
+										{{ form.rimdiamter }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext10">Load Index</label>
+										{{ form.loadindex }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext11">Speed Symbol</label>
+										{{ form.speedsymbol }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext12">Category <font color="red">*</font></label></label>
+										{{ form.category }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext13">Pattern</label>
+										{{ form.pattern }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext14">Product Description</label>
+										{{ form.description }}
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext15">Warranty</label>
+										{{ form.warranty }}
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="form-group form-custom">
+										<label for="Inputtext17">MRP</label>
+										{{ form.mrp }}
+									</div>
+								</div>
+							</div>
+                            <div class="row" id="pro-spec-row">
+                                <div class="col-xs-12 ">
+									<div class="form-group form-custom">
+										<label for="">Warranty Summary</label>
+										{{ form.warranty_summery }}
+									</div>
+								</div>
+                            </div>
+
+							<div class="pull-right">
+									<button class="btn btn-default" id="update_tyre" >Update</button>&nbsp;
+                                    <button type="button" onclick="window.location.href='{% url "carx:tyre_list" %}'" class="btn btn-default" id="cancel_tyre" >Cancel</button>
+								    </div>
+						</form>
+					</div>
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+
+
+
+
+   {% endblock %}
