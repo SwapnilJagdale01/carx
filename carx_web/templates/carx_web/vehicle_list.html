@@ -115,7 +115,7 @@
 			<h3>Vehicle List</h3>
 			 <div class="listing-buttons">
 
-		    	<a class="btn btn-default" href="{% url 'carx_web:createVehicle' %}" id="listing-btn" role="button">Add New Vehicle</a>
+		    	<a class="btn btn-default" href="{% url 'carx:createVehicle' %}" id="listing-btn" role="button">Add New Vehicle</a>
 			    <a class="btn btn-default" href="#" id="listing-btn1" role="button">Add Multiple Vehicle</a>
 			</div>
          </div>
@@ -162,8 +162,8 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                               </button>
                               <ul class="dropdown-menu" role="menu" style="min-width: 1em !important;">
-                                <li><a href="{% url 'carx_web:update_vehicle' vehicle.id %}">Edit</a></li>
-                                <li><a href="{% url 'carx_web:update_vehicle' vehicle.id %}"> Display</a></li>
+                                <li><a href="{% url 'carx:update_vehicle' vehicle.id %}">Edit</a></li>
+                                <li><a href="{% url 'carx:update_vehicle' vehicle.id %}"> Display</a></li>
                                 <li><a href="#"  onclick="deleteVehicle({{ vehicle.id }})">Delete</a></li>
                               </ul>
                             </div>

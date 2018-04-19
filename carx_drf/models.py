@@ -29,12 +29,12 @@ VEHICLE_TYPE = (
 
 
 class Customer(models.Model):
-    mobile = models.CharField(max_length=30)
+    mobile = models.CharField(max_length=30, unique=True)
     profilepic = models.ImageField(upload_to='static/profile/', max_length=100, blank=True, null=True)
     otp = models.IntegerField(blank=True, null=True)
     createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
     name = models.CharField(max_length=100)
-    email = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=50)
     socialId = models.CharField(max_length=500, blank=True, null=True, db_column='socialId')
     status = models.BooleanField(default=False)
@@ -119,23 +119,32 @@ class Vehicle(models.Model):
         db_table = 'vehicle'
         app_label = 'carx_drf'
 
+    def __str__(self):
+        return self.name
+
 
 class Tyre(models.Model):
-    make = models.ForeignKey(Maker, models.DO_NOTHING, db_column='make')
-    model = models.ForeignKey(Makermodel, models.DO_NOTHING, db_column='model')
-    type = models.CharField(max_length=100)
+    vehicle = models.ForeignKey(Vehicle,  null=True,blank=True,db_column='vahicle',on_delete=models.PROTECT)
+    product_type = models.CharField(max_length=100)
     normalsectionwidth = models.CharField(db_column='normalSectionWidth', max_length=100, blank=True, null=True)  # Field name made lowercase.
     normalaspectratio = models.CharField(db_column='normalAspectRatio', max_length=100, blank=True, null=True)  # Field name made lowercase.
     constructiontype = models.CharField(db_column='constructionType', max_length=100, blank=True, null=True)  # Field name made lowercase.
     rimdiamter = models.CharField(db_column='rimDiamter', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    leadindex = models.CharField(db_column='leadIndex', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    loadindex = models.CharField(db_column='leadIndex', max_length=100, blank=True, null=True)  # Field name made lowercase.
     speedsymbol = models.CharField(db_column='speedSymbol', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category')
+    category = models.ForeignKey(Category,  db_column='category' ,null=True,blank=True,on_delete=models.PROTECT)
     pattern = models.CharField(max_length=100, blank=True, null=True)
     description = models.CharField(max_length=100, blank=True, null=True)
     warranty = models.CharField(max_length=100, blank=True, null=True)
-    image = models.ImageField(max_length=200, blank=True, null=True, upload_to='static/tyres/')
+    warranty_summery = models.CharField(max_length=500, blank=True, null=True)
+    left_image = models.CharField(max_length=500, blank=True, null=True )
+    right_image = models.CharField(max_length=500, blank=True, null=True )
+    front_image = models.CharField(max_length=500, blank=True, null=True )
+    back_image = models.CharField(max_length=500, blank=True, null=True)
     mrp = models.CharField(max_length=100, blank=True, null=True)
+    construction_type_R=models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    brand = models.CharField(max_length=150, blank=True, null=True)
 
     class Meta:
         managed = True
@@ -143,5 +152,8 @@ class Tyre(models.Model):
         app_label='carx_drf'
 
     def __str__(self):
-        return self.type
+        return self.name
+
+    def __unicode__(self):
+        return self.name
 

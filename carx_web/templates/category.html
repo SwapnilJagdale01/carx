@@ -1,84 +1,69 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
-{%block styleBlock%}
-{%endblock%}
+{% block style %}
+    <style>
+    #create_category{
+	border-radius:0;
+	background:linear-gradient(to right, #1a82d1 ,#074b7e);
+	color:white;
+	padding:5px 40px;
+}
+     #cancel_category{
+	border-radius:0;
+	background:linear-gradient(to right, #2b542c ,#087b7e);
+	color:white;
+	padding:5px 40px;
 
+}
+    </style>
+{% endblock %}
+{% block ScriptBlock %}
 
-{%block ScriptBlock%}
-{%endblock%}
+  $(document).ready(function () {
+      console.log("hiiii");
 
+           $('#create_category').click(function (event) {
+               if($('#id_name').val()!='') {
+               $('#category_form').submit();
+                }
+             else{
+                    alert('Please Insert category name');
+            }
+           });
 
-				 <!-- NAVBAR -->
+  });
 
-{% block content %}
+{% endblock %}
+	{% block content %}
 				 <!-- CONTENT -->
-				<div class="row">
+				<div class="row">	
 					<div class="col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-						<div class="vendor-form-outer">
+						<div class="vendor-form-outer">	
 							<div class="container-fluid" id="vendor-form-container">
-								<h2>Create Vendor</h2>
+								<h2>Create Category</h2>
+							
 
-
-								<form >
-									<div class="row" id="vendor-row">
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext11">Name</label>
-												<input type="text" class="form-control" id="Inputtext11" placeholder="Shop Name">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext22">Photo</label>
-												<input type="file" class="form-control" id="Inputtext22" placeholder="">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext33">Address</label>
-												<input type="text" class="form-control" id="Inputtext33" placeholder="">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext44">Phone</label>
-												<input type="text" class="form-control" id="Inputtext44" placeholder="">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext55">Email</label>
-												<input type="email" class="form-control" id="Inputtext55" placeholder="">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext66">Username</label>
-												<input type="text" class="form-control" id="Inputtext66" placeholder="">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext77">Password</label>
-												<input type="password" class="form-control" id="Inputtext77" placeholder="">
-											</div>
-										</div>
-										<div class="col-xs-12 col-sm-6 col-md-6">
-											<div class="form-group form-custom">
-												<label for="Inputtext88">Confirm Password</label>
-												<input type="password" class="form-control" id="Inputtext88" placeholder="">
-											</div>
-										</div>
-									</div>
-
-
-
-									<a class="btn btn-default pull-right" href="#" id="vendor-btn" role="button">Create</a>
-								</form>
+								<form action="{% url 'carx:save_category' %}" id="category_form" class="form-horizontal" method="POST">
+									{% csrf_token %}
+                                    <div class="row" id="vendor-row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Name  <font color="red">*</font></label>
+                                                <div class="col-md-9">
+                                                    {{form.name}}
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+									    </div>
+                                    </div>
+									<div class="pull-right">
+									<button class="btn btn-default" id="create_category" >Create</button>&nbsp;
+                                    <button onclick="window.location.href='{% url "carx:category_list" %}'" class="btn btn-default" id="cancel_category" >Cancel</button>
+								    </div>
+                                </form>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-{%endblock%}
+						
+			{% endblock %}

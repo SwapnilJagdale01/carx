@@ -1,17 +1,82 @@
 from django import forms
 from django.contrib.auth import authenticate
-from carx_drf.models import Vehicle, Maker, Makermodel
+from carx_drf.models import Vehicle, Maker, Makermodel,Category,Tyre
 
 
 class loginForm(forms.Form):
-    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class':'form-control form-login' , 'placeholder':'Username','autocomplete': 'off'}))
-    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class':'form-control form-login ', 'placeholder':' Password','autocomplete': 'off'}))
+    username = forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control form-login' , 'placeholder':'Username','autocomplete': 'off'}))
+    password = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'class':'form-control form-login ' , 'placeholder':' Password','autocomplete': 'off'}))
 
     def login(self, request):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         return user
+
+class category_form(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'autocomplete': 'on','class':'form-control','placeholder':'Category Name'}))
+
+
+    class Meta:
+        model = Category
+        fields = ['name',]
+
+class maker_form(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'autocomplete': 'on','class':'form-control','placeholder':'Maker Name'}))
+
+
+    class Meta:
+        model = Maker
+        fields = ['name',]
+
+
+product_type=(('',' PLEASE SELECT'),('PSR','PSR'),('LT','LT'),('F','F'))
+construction_type=(('',' PLEASE SELECT'),('Radial','Radial'),('BIAS','BIAS'))
+class tyre_form(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Tyre Name'}))
+    brand = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Tyre Brand'}))
+    product_type = forms.CharField(required=False, widget=forms.Select(choices=product_type, attrs={'class': 'form-control'}))
+    vehicle = forms.ModelChoiceField(required=True,queryset=Vehicle.objects.all(), empty_label='PLEASE SELECT',
+                                    widget=forms.Select(attrs={'class': 'form-control', 'autocomplete': 'off'}))
+    left_image = forms.FileField(required=False)
+    right_image = forms.FileField(required=False)
+    front_image = forms.FileField(required=False)
+    back_image = forms.FileField(required=False)
+
+    normalsectionwidth = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Normal Section Width'}))
+    normalaspectratio = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Normal Aspect Ratio'}))
+    constructiontype = forms.CharField(required=False, widget=forms.Select(choices=construction_type, attrs={'class': 'form-control'}))
+    construction_type_R = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'R/B'}))
+    rimdiamter = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Rim Diamter'}))
+    loadindex = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Load Index'}))
+    speedsymbol = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Speed Symbol'}))
+    category = forms.ModelChoiceField(required=True,queryset=Category.objects.all(),empty_label='PLEASE SELECT',widget=forms.Select( attrs={'class': 'form-control', 'autocomplete': 'off'}))
+    pattern = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Pattern'}))
+    description = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Description'}))
+    warranty = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Warranty'}))
+    warranty_summery = forms.CharField(required=False, widget=forms.Textarea(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Warranty Summery'}))
+
+    mrp = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'autocomplete': 'off', 'class': 'form-control', 'placeholder': 'Rs.'}))
+    class Meta:
+        model = Tyre
+        fields = ['name', 'product_type','brand','vehicle','left_image','right_image','front_image','back_image',
+                  'normalsectionwidth','normalaspectratio','constructiontype','construction_type_R','rimdiamter',
+                  'loadindex','speedsymbol','category','pattern','description','warranty','warranty_summery','mrp']
 
 
 class VehicleForm(forms.ModelForm):

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>CATEGORY CREATE</title>
+        <title>Dashboard</title>
 		
 		<link rel="stylesheet" href="{% static 'css/marvel_sidebar.css'%}">
 		<link rel="stylesheet" href="{% static 'css/marvel_menu.css'%}">
@@ -27,11 +27,13 @@
                 </div>
 				
 				<ul id="list-components">
-					<li><a href=""><i class="fa fa-tachometer"></i>
+					<li><a href="{% url "carx:home" %}"><i class="fa fa-tachometer"></i>
 						<h4>Dashboard</h4></a></li>
-					<li><a href=""><i class="fa fa-tachometer"></i>
-						<h4>Create Tyre</h4></a></li>
-					<li><a href=""><i class="fa fa-tachometer"></i>
+					<li><a href="{% url "carx:category_list" %}"><i class="fa fa-tachometer"></i>
+						<h4>Category List</h4></a></li>
+                     <li><a href="{% url "carx:vehicle_list" %}"><i class="fa fa-tachometer"></i>
+						<h4>Vehicle List</h4></a></li>
+					<li><a href="{% url "carx:tyre_list" %}"><i class="fa fa-tachometer"></i>
 						<h4>Tyre List</h4></a></li>
 				</ul>
 				
@@ -74,7 +76,7 @@
 												<i class="flaticon-truck-wheel"></i>
 											</div>
 											<div class="col-xs-8" id="cat-text">
-												<a href=""><h4>TYRES</h4></a>
+												<a href="{% url "carx:tyre_list" %}"><h4>TYRES</h4></a>
 											</div>
 										</div>
 									</div>
@@ -131,6 +133,7 @@
                      $('#sidebar').toggleClass('active');
                  });
              });
+
         </script>
     </body>
 </html>

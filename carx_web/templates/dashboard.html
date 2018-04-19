@@ -2,10 +2,13 @@
 {% load staticfiles %}
 
 {% block styleBlock %}
-    	<link rel="stylesheet" href="{% static 'css/marvel_dashboard_new.css' %}">
+
 {% endblock %}
 
-
+{% block head %}
+<link rel="stylesheet" href="{% static 'font/flaticon.css'%}">
+<link rel="stylesheet" href="{% static 'css/marvel_dashboard_new.css'%}">
+{% endblock %}
 {% block content %}
 
 <div class="categories-form-outer">
