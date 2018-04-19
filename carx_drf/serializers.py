@@ -22,4 +22,4 @@ class CustomerSerializer(serializers.ModelSerializer):
 class TyreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tyre
-        fields = ('id', 'make', 'model', 'image', 'category', 'pattern', 'description', 'warranty')
+        fields = ('id',  'vehicle', 'category', 'pattern', 'description', 'warranty', 'product_type', 'normalsectionwidth', 'normalaspectratio', 'constructiontype', 'rimdiamter', 'loadindex', 'speedsymbol', 'warranty_summery', 'left_image', 'right_image', 'front_image', 'back_image', 'mrp', 'name', 'brand')

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block style%}
+{% block styleBlock%}
 
 {% endblock %}
 
@@ -34,7 +34,7 @@
 					<div class="container-fluid" id="d_vehicle-create-container" style="background-color: white;">
 
 						<h2>Create Vehicle</h2>
-						<form method="POST" action="{% url 'carx_web:save_vehicle' %}" enctype="multipart/form-data">
+						<form method="POST" action="{% url 'carx:save_vehicle' %}" enctype="multipart/form-data">
                             {% csrf_token %}
 							<div class="row" id="vehicle-row">
 								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 vehicle-col">
@@ -255,6 +255,7 @@
 
 
 {% block ScriptBlock %}
+<script>
  $('#id_enddate').datepicker({
                        format: " yyyy", // Notice the Extra space at the beginning
                        viewMode: "years",
@@ -285,7 +286,7 @@
 
         maker_id = $(this).val();
         $.ajax({
-                url: '{%  url 'carx_web:model_list' %}',
+                url: '{%  url 'carx:model_list' %}',
                 data: {maker:maker_id,
 
                        },
@@ -310,4 +311,6 @@
 
 
   });
+</script>
+
 {% endblock %}

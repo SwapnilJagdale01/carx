@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mn$j=qc*gj#8!w)pn&th@8g5%co$*f72=s*7^yfs6o+mxojhjm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.1.70', '127.0.0.1']
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'rest_framework.authtoken',
+    'import_export',
 
 ]
 SITE_ID = 1
@@ -87,7 +88,7 @@ ROOT_URLCONF = 'carx.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,7 +100,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'carx.wsgi.application'
 
 
@@ -165,6 +165,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
 )
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^delete/vehicle/(?P<pk>\d+)/$', views.delete_vehicle, name='delete_vehicle'),
     url(r'^update/vehicle/(?P<pk>\d+)/$', views.update_vehicle_save, name='update_vehicle_save'),
     url(r'^vehicle/list', views.vehicle_list, name='vehicle_list'),
+    url(r'^home/', views.Home, name='home'),
+    url(r'^login/', views.Login, name="login"),
     url(r'^category_list/', views.CategoryList, name="category_list"),
     url(r'^save_category/', views.SaveCategory, name="save_category"),
     url(r'^category_view/(?P<category_id>\d+)', views.ViewCategory, name="category_view"),
@@ -27,8 +29,6 @@ urlpatterns = [
     url(r'^tyre_update/(?P<tyre_id>\d+)', views.UpdateTyre, name="tyre_update"),
     url(r'^tyre_import/', views.TyreImport, name="tyre_import"),
     url(r'^tyre_import_data/', views.TyreImportData, name="tyre_import_data"),
-    url(r'^tyre_import_format/', views.TyreImportExcelFormat, name="tyre_import_format"),
-    url(r'^home/', views.Home,name='home'),
-    url(r'', views.Login,name="login"),
+    url(r'^tyre_import_format/', views.TyreImportExcelFormat, name="tyre_import_format")
 
 ]

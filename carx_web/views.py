@@ -19,9 +19,14 @@ from tablib import Dataset
 import xlwt
 import os
 
+
 @login_required(login_url='/')
 def Home(request):
-    return render(request, 'dashboard.html')
+    return render(request,'home.html')
+
+
+def handler404(request):
+    return redirect('/carx/home/')
 
 
 def Login(request):
@@ -37,15 +42,15 @@ def Login(request):
 
         if user:
             login(request, user)
-            return redirect('carx:home')
+            return redirect('/carx/home/')
         else:
             messages.success(request, "Enter Valid User Name and Password.")
             form = loginForm()
             return render(request, 'carx_login.html', {'form': form})
 
-    return render(request,'carx_login.html', {'form':form})
+    return render(request,'carx_login.html',{'form':form})
 
-
+@login_required(login_url='/carx/login')
 def Logout(request):
     logout(request)
     return redirect('/')
@@ -68,7 +73,7 @@ def save_vehicle(request):
 
             form.save()
             messages.success(request, 'Record added successfully')
-            return redirect('/create/vehicle/')
+            return redirect('/carx/create/vehicle/')
         else:
             print form.errors
             return render(request, 'createVehicle.html', {'form': form})
@@ -106,7 +111,7 @@ def update_vehicle_save(request, pk):
             print "form valid"
             form.save()
             messages.success(request, 'Record Update successfully')
-            return redirect('/vehicle/list')
+            return redirect('/carx/vehicle/list')
         else:
             print form.errors
             return render(request, 'updateVehicle.html', {'form': form})
@@ -141,10 +146,10 @@ def delete_vehicle(request, pk):
         if vehicle:
             vehicle.delete()
             messages.success(request, 'Record Delete successfully')
-            return redirect('/vehicle/list')
+            return redirect('/carx/vehicle/list')
     except:
         messages.warning(request, 'Record Delete successfully')
-        return redirect('/vehicle/list')
+        return redirect('/carx/vehicle/list')
 
 @login_required(login_url='/')
 def model_list(request):
@@ -164,6 +169,8 @@ def model_list(request):
         return HttpResponse(json.dumps(modelDict), content_type="application/json")
     else:
         return HttpResponse(json.dumps(modelDict), content_type="application/json")
+
+
 
 
 @login_required(login_url='/')
@@ -208,11 +215,10 @@ def SaveTyre(request):
 
             tyre.save()
             messages.success(request, 'Record added successfully')
-        return redirect('/tyre_list/')
+        return redirect('/carx/tyre_list/')
     else:
         form =tyre_form()
     return render(request, 'tyre_list.html',{'form':form} )
-
 
 @login_required(login_url='/')
 def SaveCategory(request):
@@ -224,12 +230,12 @@ def SaveCategory(request):
             else:
                 form.save()
                 messages.success(request, 'Category added successfully')
-        return redirect('/category_list/')
+        return redirect('/carx/category_list/')
     else:
         form =category_form()
     return render(request, 'category.html',{'form':form} )
 
-@login_required(login_url='/')
+@login_required(login_url='/carx/login')
 def ViewCategory(request,category_id):
     category_rec = Category.objects.filter(id=category_id)
     if category_rec:
@@ -288,7 +294,7 @@ def UpdateTyre(request,tyre_id):
                 tyre.back_image = raw_file_path_and_name
             tyre.save()
             messages.success(request, 'Tyre updated successfully')
-        return redirect('/tyre_list/')
+        return redirect('/carx/tyre_list/')
     else:
 
         form = tyre_form(instance=tyre_rec[0])
@@ -304,15 +310,14 @@ def UpdateCategory(request,category_id):
             form.save()
             messages.success(request, 'Category updated successfully')
 
-        return redirect('/category_list/')
+        return redirect('/carx/category_list/')
     else :
         form = category_form(instance=category_rec[0])
         return render(request, 'update_category.html', {'form': form,'id':category_rec[0].id,'action':'update'})
 
 @login_required(login_url='/')
 def CategoryList(request):
-
-    category_list = Category.objects.all()
+    category_list=Category.objects.all()
     page = request.GET.get('page', 1)
 
     paginator = Paginator(category_list, 10)
@@ -322,8 +327,7 @@ def CategoryList(request):
         cat_list = paginator.page(1)
     except EmptyPage:
         cat_list = paginator.page(paginator.num_pages)
-    return render(request, 'category_list.html', {'category_list': cat_list})
-
+    return render(request, 'category_list.html',{'category_list':cat_list})
 
 @login_required(login_url='/')
 def CategoryDelete(request,category_id):
@@ -334,8 +338,7 @@ def CategoryDelete(request,category_id):
             messages.success(request, 'Category deleted successfully')
         except:
             messages.warning(request, 'You can not delete the Category as its relation exists!')
-    return redirect('/category_list/')
-
+    return redirect('/carx/category_list/')
 
 @login_required(login_url='/')
 def Maker(request):
@@ -358,8 +361,8 @@ def TyreList(request):
         tyre_list = paginator.page(1)
     except EmptyPage:
         tyre_list = paginator.page(paginator.num_pages)
-    path = 'http://'+request.META['HTTP_HOST']+'/media/'
-    return render(request, 'tyre_list.html', {'tyre_list':tyre_list,'path':path})
+    path='http://'+request.META['HTTP_HOST']+'/media/'
+    return render(request, 'tyre_list.html',{'tyre_list':tyre_list,'path':path})
 
 @login_required(login_url='/')
 def TyreImport(request):
@@ -375,9 +378,9 @@ def TyreImport(request):
                 continue
             else:
                 tyre_rec=Tyre()
-                vehicle_data=Vehicle.objects.filter(name=file_rec['vehicle'])
-                if vehicle_data:
-                    tyre_rec.vehicle=vehicle_data[0]
+                # vehicle_data=Vehicle.objects.filter(make=file_rec['vehicle'])
+                # if vehicle_data:
+                #     tyre_rec.vehicle=vehicle_data[0]
                 category_data=Category.objects.filter(name=file_rec['category'])
                 if category_data:
                     tyre_rec.category=category_data[0]
@@ -397,7 +400,8 @@ def TyreImport(request):
                 tyre_rec.name=file_rec['Name']
                 tyre_rec.brand=file_rec['Brand']
                 tyre_rec.save()
-    return redirect('/tyre_list/')
+    return redirect('/carx/tyre_list/')
+
 
 @login_required(login_url='/')
 def TyreImportData(request):
@@ -413,7 +417,6 @@ def AddTyre(request):
     form = tyre_form()
     return render(request, 'add_tyre.html', {'form': form})
 
-
 @login_required(login_url='/')
 def DeleteTyre(request,tyre_id):
     tyre_rec = Tyre.objects.filter(id=tyre_id)
@@ -423,7 +426,7 @@ def DeleteTyre(request,tyre_id):
             messages.success(request, 'Record deleted successfully')
         except:
             messages.warning(request, 'You can not delete the Tyre as its relation exists!')
-    return redirect('/tyre_list/')
+    return redirect('/carx/tyre_list/')
 
 @login_required(login_url='/')
 def TyreImportExcelFormat(request):

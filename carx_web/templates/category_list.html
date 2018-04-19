@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% block styleBlock %}
+    <link rel="stylesheet" href="{% static 'css/marvel_listing.css'%}">
+{% endblock %}
 {% block ScriptBlock %}
-
+ <script>
   $(document).ready(function () {
                  $('#sidebarCollapse').on('click', function () {
                      $('#sidebar').toggleClass('active');
@@ -11,12 +13,7 @@
                         $('.alert').fadeOut('slow');
                     }, 2500);
   });
-
-{% endblock %}
-{% block head %}
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'css/marvel_listing.css' %}">
+ </script>
 {% endblock %}
 {% block content %}
 				 <!-- CONTENT -->

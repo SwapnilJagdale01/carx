@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block style %}
+{% block styleBlock %}
     <style>
     #create_category{
 	border-radius:0;
@@ -18,7 +18,7 @@
     </style>
 {% endblock %}
 {% block ScriptBlock %}
-
+ <script>
   $(document).ready(function () {
       console.log("hiiii");
 
@@ -32,7 +32,7 @@
            });
 
   });
-
+    </script>
 {% endblock %}
 	{% block content %}
 				 <!-- CONTENT -->
@@ -57,8 +57,8 @@
 									    </div>
                                     </div>
 									<div class="pull-right">
-									<button class="btn btn-default" id="create_category" >Create</button>&nbsp;
-                                    <button onclick="window.location.href='{% url "carx:category_list" %}'" class="btn btn-default" id="cancel_category" >Cancel</button>
+									<button type="button" class="btn btn-default" id="create_category" >Create</button>&nbsp;
+                                    <button type="button" onclick="window.location.href='{% url "carx:category_list" %}'" class="btn btn-default" id="cancel_category" >Cancel</button>
 								    </div>
                                 </form>
 							</div>

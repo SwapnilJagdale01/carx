@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block style %}
+{% block styleBlock %}
     <link rel="stylesheet" href="{% static 'css/marvel_createtyre.css'%}">
 
     <style>
@@ -20,7 +20,7 @@
     </style>
 {% endblock %}
 {% block ScriptBlock %}
-
+ <script>
   $(document).ready(function () {
       console.log("hiiii");
 
@@ -104,7 +104,7 @@
                 });
 
   });
-
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -274,9 +274,9 @@
 									</div>
 								</div>
 							</div>
-                            <div class="row" id="pro-spec-row">
-                                <div class="col-xs-12 ">
-									<div class="form-group form-custom">
+                            <div class="row" id="pro-file-row">
+                                <div class="col-xs-12">
+									<div class="form-group form-custom" >
 										<label for="">Warranty Summary</label>
 										{{ form.warranty_summery }}
 									</div>

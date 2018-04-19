@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block style %}
-
+{% block styleBlock %}
+    <link rel="stylesheet" href="{% static 'css/marvel_listing.css'%}">
     <style>
     #listing-btn2{
 	border-radius:0;
@@ -19,15 +19,10 @@
 }
     </style>
 {% endblock %}
-{% block head %}
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'css/marvel_listing.css' %}">
-{% endblock %}
 {% block ScriptBlock %}
-
+ <script>
   $(document).ready(function () {
-    $("#import").click(function () {
+       $("#import").click(function () {
       if ($("#file").val() == "") {
           alert("Please select a File to Import...");
       }
@@ -45,7 +40,8 @@
     console.log(fileExtension);
     if (fileExtension != ".xls") {
         alert("Only .xls files are allowed!");
-    $("#file").val('');
+        $("#file").val('');
+
     }
 }
                  $('#sidebarCollapse').on('click', function () {
@@ -55,7 +51,7 @@
                         $('.alert').fadeOut('slow');
                     }, 2500);
              });
-
+ </script>
 {% endblock %}
 {% block content %}
 				 <!-- CONTENT -->
@@ -92,6 +88,7 @@
 									</thead>
 									<tbody id="table-body">
                                     {% for tyre in tyre_list %}
+                                        <input type="hidden" id="tyre_id" name="tyre_id" value="{{ tyre.id }}">
 									  <tr>
 {#										<td>{{ forloop.counter }}</td>#}
 										<td>{{ tyre.name }}</td>
@@ -196,7 +193,14 @@
                        <input type="file" name="excel" id="file">
                     </div>
 
-                    <div class="modal-footer">
+
+                     <div class="modal-body">
+                    <h4><b>Please follow the instructions before uploading the file</b></h4><br>
+                    Uploading file should be a .xsl file<br>
+                    Date format is Year-Month-Date for example 2018-12-20<br>
+                    Successive rows should be filled out from first row onwards<br>
+                </div>
+                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" id="import" class="btn btn-default">Upload</button>
                     </div>

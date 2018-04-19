@@ -20,13 +20,16 @@ from django.conf.urls.static import static
 import carx_drf.urls
 import carx_web.urls
 import rest_auth.urls
+from carx_web import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^rest-auth/', include('rest_auth.urls')),
     #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(carx_drf.urls, namespace='carx_drf')),
-    url(r'', include(carx_web.urls, namespace='carx')),
-	
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^carx/', include(carx_web.urls, namespace='carx')),
+    url(r'^$', views.Login, name='login'),
+    ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'carx_web.views.handler404'

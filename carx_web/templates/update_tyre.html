@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block style %}
-       <style>
+{% block styleBlock %}
+    <link rel="stylesheet" href="{% static 'css/marvel_createtyre.css'%}">
+    <style>
  #update_tyre{
 	border-radius:0;
 	background:linear-gradient(to right, #1a82d1 ,#074b7e);
@@ -17,22 +18,18 @@
 }
     </style>
 {% endblock %}
-
-{% block head %}
-     <link rel="stylesheet" href="{% static 'css/marvel_createtyre.css'%}">
-{% endblock %}
 {% block ScriptBlock %}
-
+ <script>
   $(document).ready(function () {
       console.log("hiiii");
       if ($('#action_type').val()=='view'){
-        $('#header').html('<h2>View Tyre</h2>');
+          $("#header").html('<h2>View Tyre</h2>');
          $('.form-control').prop("disabled", true);
          $('#pro-file-row').prop("disabled", true);
          document.getElementById('update_tyre').style.visibility = 'hidden';
       }
       else{
-    $('#header').html('<h2>Update Tyre</h2>');
+          $("#header").html('<h2>Update Tyre</h2>');
           $('.form-control').prop("disabled", false);
           $('#pro-file-row').prop("disabled", false);
           document.getElementById('update_tyre').style.visibility = 'visible';
@@ -123,7 +120,7 @@
                 });
 
   });
-
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -135,7 +132,7 @@
                 <!-- CONTENT -->
 				<div class="product-form-outer">
 					<div class="container-fluid" id="product-form-container">
-                        <div id="header"><h2>Create Tyre</h2></div>
+					<div id="header"></div>
 
 
 						<form action="" id="tyre_form" enctype="multipart/form-data" method="POST">
@@ -300,10 +297,10 @@
 									</div>
 								</div>
 							</div>
-                            <div class="row" id="pro-spec-row">
-                                <div class="col-xs-12 ">
+                           <div class="row" id="pro-file-row">
+                               <div class="col-xs-12 ">
 									<div class="form-group form-custom">
-										<label for="">Warranty Summary</label>
+										<label for="Inputtext16">Warranty Summary</label>
 										{{ form.warranty_summery }}
 									</div>
 								</div>

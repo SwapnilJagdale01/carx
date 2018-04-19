@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block style %}
+{% block styleBlock %}
 <style type="text/css">
     body {
 		font-family: 'Varela Round', sans-serif;
@@ -115,14 +115,14 @@
 			<h3>Vehicle List</h3>
 			 <div class="listing-buttons">
 
-		    	<a class="btn btn-default" href="{% url 'carx_web:createVehicle' %}" id="listing-btn" role="button">Add New Vehicle</a>
+		    	<a class="btn btn-default" href="{% url 'carx:createVehicle' %}" id="listing-btn" role="button">Add New Vehicle</a>
 			    <a class="btn btn-default" href="#" id="listing-btn1" role="button">Add Multiple Vehicle</a>
 			</div>
          </div>
             <div class="row">
 				<div class="col-xs-12">
 		 		   <div class="table table-responsive" style="overflow-x:auto;">
-                       <table class="table table-bordered">
+                       <table class="table table-bordered" style="margin-bottom: 6em;">
                        <thead id="table-header">
                         <tr>
                           <th>Name </th>
@@ -162,8 +162,8 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                               </button>
                               <ul class="dropdown-menu" role="menu" style="min-width: 1em !important;">
-                                <li><a href="{% url 'carx_web:update_vehicle' vehicle.id %}">Edit</a></li>
-                                <li><a href="{% url 'carx_web:update_vehicle' vehicle.id %}"> Display</a></li>
+                                <li><a href="{% url 'carx:update_vehicle' vehicle.id %}">Edit</a></li>
+                                <li><a href="{% url 'carx:update_vehicle' vehicle.id %}"> Display</a></li>
                                 <li><a href="#"  onclick="deleteVehicle({{ vehicle.id }})">Delete</a></li>
                               </ul>
                             </div>
@@ -226,13 +226,14 @@
 
 
 {% block ScriptBlock %}
+    <script>
 
 
     function deleteVehicle(vehicle_id) {
         $('#myModal').modal('show');
-        $("#btn_delete").attr('href', '/delete/vehicle/'+vehicle_id+'/');
+        $("#btn_delete").attr('href', '/carx/delete/vehicle/'+vehicle_id+'/');
     }
 
-
+</script>
 
  {% endblock %}
